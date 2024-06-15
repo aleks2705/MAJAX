@@ -2,10 +2,60 @@ import * as React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Pressable, Image } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
+import { ExcelRenderer } from 'react-excel-renderer';
 
 export default function TestsScreen({ navigation }) {
     const [cellText, setCellText] = React.useState('');
+    const [questions, setQuestions] = React.useState([]);
+    const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(0);
 
+    const readExcelFile = (filePath) => {
+        console.log('Lecture à ', filePath);
+        ExcelRenderer(filePath, (err, resp) => {
+            if (err) {
+                console.error('Error:', err);
+            } else {
+                const rows = resp.rows;
+                console.log('Il y a', rows);
+
+                const questionsFromExcel = [];
+                for (let i = 0; i < rows.length && i < 18; i++) {
+                    if (rows[i] && rows[i][0]) { 
+                        questionsFromExcel.push(rows[i][0]);
+                    } else {
+                        questionsFromExcel.push('No data found');
+                    }
+                }
+                console.log('Question:', questionsFromExcel);
+                setQuestions(questionsFromExcel);
+
+                const initialText = questionsFromExcel[0];
+                console.log('Text de A1:', initialText);
+                setCellText(initialText);
+            }
+        });
+    };
+
+    React.useEffect(() => {
+        const filePath = 'MAJAX/src/new.xlsx';
+        console.log('Lecture.....');
+        readExcelFile(filePath);
+    }, []);
+
+    const handleValiderPress = () => {
+        const nextIndex = currentQuestionIndex + 1;
+        console.log('ligne suivante:', nextIndex);
+        
+        if (nextIndex < questions.length) {
+            setCurrentQuestionIndex(nextIndex);
+            const nextText = questions[nextIndex];
+            console.log('texte suivant:', nextText);
+            setCellText(nextText);
+        } else {
+            console.log('Fin des données');
+            setCellText('FIn des questions');
+        }
+    };
 
     return (
         <SafeAreaView style={styles.safeArea}>
@@ -68,17 +118,8 @@ export default function TestsScreen({ navigation }) {
                 </Pressable>
             </View>
 
-            <View>
-                <Pressable style={styles.text}
-                    onPress={() => { /* Text Pressable */ }}
-                    style={({ pressed }) => {
-                        return { opacity: pressed ? 0.5 : 1 }
-                    }}>
-                </Pressable>
-            </View>
-
             <Pressable
-                onPress={() => { /* Valider button */ }}
+                onPress={handleValiderPress}
                 style={({ pressed }) => {
                     return { opacity: pressed ? 0.5 : 1, ...styles.button }
                 }}>
@@ -105,10 +146,10 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'black',
         backgroundColor: 'darkcyan',
-        textAlign: 'justify',
-        marginBottom: 20,
-        alignItems: 'center',
-        justifyContent: 'center',
+        textAlign: 'center', 
+        justifyContent: 'center', 
+        padding: 10, 
+        color: 'white', 
     },
     image: {
         marginLeft: 15,
