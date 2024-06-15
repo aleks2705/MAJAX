@@ -1,101 +1,101 @@
-import * as React from 'react'; // * = everything
+import * as React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Pressable, Image } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
 
-export default function TestsScreen({navigation}) {
-    const [searchText, setSearchText] = React.useState('');
-    return(
+export default function TestsScreen({ navigation }) {
+    const [cellText, setCellText] = React.useState('');
+
+
+    return (
         <SafeAreaView style={styles.safeArea}>
             <View style={styles.imageContainer}>
-                <Image style={styles.image} source={require("../../assets/images/MAJAX.png")} resizeMode='contain'/>
-                <Image style={{width: 50, height: 75, marginTop: 10, marginLeft:200}} source={require("../../assets/images/epf.jpg")} resizeMode='contain'/>
+                <Image style={styles.image} source={require("../../assets/images/MAJAX.png")} resizeMode='contain' />
+                <Image style={{ width: 50, height: 75, marginTop: 10, marginLeft: 200 }} source={require("../../assets/images/epf.jpg")} resizeMode='contain' />
             </View>
             <View style={styles.container}>
-                <Pressable  
+                <Pressable
                     onPress={() => navigation.goBack()}
-                    style={( { pressed }) => {
-                        return{ opacity: pressed ? 0.5 : 1}
+                    style={({ pressed }) => {
+                        return { opacity: pressed ? 0.5 : 1 }
                     }}>
-                    <Entypo name = "back" size={30}/>
+                    <Entypo name="back" size={30} />
                 </Pressable>
                 <Text style={styles.text}>
-                   {/*Ajouter questions BDD*/}
+                    {cellText}
                 </Text>
             </View>
 
             <View style={styles.boutonsContainer}>
                 <Pressable
-                    onPress={() => {/* 1er bouton*/}}
-                    style={( { pressed }) => {
-                        return{ opacity: pressed ? 0.5 : 1}
+                    onPress={() => { /* 1er bouton */ }}
+                    style={({ pressed }) => {
+                        return { opacity: pressed ? 0.5 : 1 }
                     }}>
-                    <FontAwesome name = "circle" size={90} color="red"/>
+                    <FontAwesome name="circle" size={90} color="red" />
                 </Pressable>
 
                 <Pressable
-                onPress={() => {/* 1er bouton*/}}
-                    style={( { pressed }) => {
-                        return{ opacity: pressed ? 0.5 : 1}
+                    onPress={() => { /* 2e bouton */ }}
+                    style={({ pressed }) => {
+                        return { opacity: pressed ? 0.5 : 1 }
                     }}>
-                    <FontAwesome name = "circle" size={60} color="orangered"/>
-                </Pressable>
-            
-                <Pressable
-                onPress={() => {/* 1er bouton*/}}
-                    style={( { pressed }) => {
-                        return{ opacity: pressed ? 0.5 : 1}
-                    }}>
-                    <FontAwesome name = "circle" size={60} color="darkgrey"/>
+                    <FontAwesome name="circle" size={60} color="orangered" />
                 </Pressable>
 
                 <Pressable
-                onPress={() => {/* 1er bouton*/}}
-                    style={( { pressed }) => {
-                        return{ opacity: pressed ? 0.5 : 1}
+                    onPress={() => { /* 3e bouton */ }}
+                    style={({ pressed }) => {
+                        return { opacity: pressed ? 0.5 : 1 }
                     }}>
-                    <FontAwesome name = "circle" size={60} color="lime"/>
+                    <FontAwesome name="circle" size={60} color="darkgrey" />
                 </Pressable>
 
                 <Pressable
-                onPress={() => {/* 1er bouton*/}}
-                    style={( { pressed }) => {
-                        return{ opacity: pressed ? 0.5 : 1}
+                    onPress={() => { /* 4e bouton */ }}
+                    style={({ pressed }) => {
+                        return { opacity: pressed ? 0.5 : 1 }
                     }}>
-                    <FontAwesome name = "circle" size={90} color="limegreen" /> 
+                    <FontAwesome name="circle" size={60} color="lime" />
+                </Pressable>
+
+                <Pressable
+                    onPress={() => { /* 5e bouton */ }}
+                    style={({ pressed }) => {
+                        return { opacity: pressed ? 0.5 : 1 }
+                    }}>
+                    <FontAwesome name="circle" size={90} color="limegreen" />
                 </Pressable>
             </View>
 
             <View>
-            <Pressable style={styles.text}
-                onPress={() => {/* 1er bouton*/}}
-                    style={( { pressed }) => {
-                        return{ opacity: pressed ? 0.5 : 1}
+                <Pressable style={styles.text}
+                    onPress={() => { /* Text Pressable */ }}
+                    style={({ pressed }) => {
+                        return { opacity: pressed ? 0.5 : 1 }
                     }}>
-                
                 </Pressable>
             </View>
-            
-            <Pressable 
-                onPress={() => {/* 1er bouton*/}}
-                style={( { pressed }) => {
-                    return{ opacity: pressed ? 0.5 : 1, ...styles.button} /*pour mettre un style qd y en a deja un*/
+
+            <Pressable
+                onPress={() => { /* Valider button */ }}
+                style={({ pressed }) => {
+                    return { opacity: pressed ? 0.5 : 1, ...styles.button }
                 }}>
                 <Text style={styles.buttonText}>Valider</Text>
             </Pressable>
-            
         </SafeAreaView>
     );
 }
+
 const styles = StyleSheet.create({
     safeArea: {
         flex: 1,
         backgroundColor: "#fff",
-        
     },
     container: {
         backgroundColor: "#fff",
-        padding: 16, 
+        padding: 16,
         marginHorizontal: 15,
     },
     text: {
@@ -139,5 +139,4 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'white',
     }
-
-})
+});

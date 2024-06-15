@@ -1,7 +1,7 @@
 import * as React from 'react'; // * = everything
 import { View, Text, StyleSheet, SafeAreaView, Image, Pressable } from 'react-native';
 import SearchBar from '../../components/SearchBar';
-import SettingsModal from '../../components/SettingsModal';
+import SettingsScreen from '../../components/SettingsScreen';
 
 export default function HomeScreen({ navigation }) {
     const [searchText, setSearchText] = React.useState('');
