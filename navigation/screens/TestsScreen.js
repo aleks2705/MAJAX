@@ -25,6 +25,7 @@ export default function TestsScreen({navigation}) {
         </SafeAreaView>
     );
 }
+
 const styles = StyleSheet.create({
     safeArea: {
         flex: 1,

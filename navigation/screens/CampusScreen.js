@@ -26,22 +26,22 @@ export default function CampusScreen({ navigation }) {
                     <Image style={styles.image2} source={require("../../assets/images/campus_cachan.png")}/>
                 </Pressable>
 
-                <Pressable style={styles.button} onPress={() => navigation.navigate("Tests") }>
+                <Pressable style={styles.button} onPress={() => navigation.navigate("Troyes") }>
                     <Text style={styles.buttonText}>Troyes</Text>
                     <Image style={styles.image2} source={require("../../assets/images/campus_troyes.png")}/>
                 </Pressable>
 
-                <Pressable style={styles.button} onPress={() => navigation.navigate("Tests") }>
+                <Pressable style={styles.button} onPress={() => navigation.navigate("Montpellier") }>
                     <Text style={styles.buttonText}>Montpellier</Text>
                     <Image style={styles.image2} source={require("../../assets/images/campus_montpellier.png")}/>
                 </Pressable>
 
-                <Pressable style={styles.button} onPress={() => navigation.navigate("Tests") }>
+                <Pressable style={styles.button} onPress={() => navigation.navigate("SaintNazaire") }>
                     <Text style={styles.buttonText}>Saint-Nazaire</Text>
                     <Image style={styles.image2} source={require("../../assets/images/campus_saint-nazaire.png")}/>
                 </Pressable>
 
-                <Pressable style={styles.button} onPress={() => navigation.navigate("Tests") }>
+                <Pressable style={styles.button} onPress={() => navigation.navigate("Dakar") }>
                     <Text style={styles.buttonText}>Dakar</Text>
                     <Image style={styles.image2} source={require("../../assets/images/campus_dakar.png")}/>
                 </Pressable>

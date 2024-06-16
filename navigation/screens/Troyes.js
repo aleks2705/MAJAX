@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, SafeAreaView, Pressable, Image, Dimensions } fr
 import SearchBar from '../../components/SearchBar';
 import Entypo from 'react-native-vector-icons/Entypo';
 
-export default function ParisCachan({navigation}) {
+export default function Troyes({navigation}) {
     const [searchText, setSearchText] = React.useState('');
     return(
         <SafeAreaView style={styles.safeArea}>
@@ -19,7 +19,7 @@ export default function ParisCachan({navigation}) {
                     </Pressable>
                 </View>
                 <Text 
-                    style={styles.textTitle}>Paris-Cachan
+                    style={styles.textTitle}>Troyes
                 </Text>
             </View>
             {/*<Image style={styles.image} source={require("../../assets/images/campus_paris_cachan2.jpeg")}/>*/}

@@ -4,11 +4,14 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { ExcelRenderer } from 'react-excel-renderer';
 
+
 export default function TestsScreen({ navigation }) {
     const [cellText, setCellText] = React.useState('');
     const [questions, setQuestions] = React.useState([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(0);
-
+    const [score, setScore] = React.useState(0);
+    const [testEnded, setTestEnded] = React.useState(false);
+//Excel!!!!!!!!
     const readExcelFile = (filePath) => {
         console.log('Lecture à ', filePath);
         ExcelRenderer(filePath, (err, resp) => {
@@ -19,7 +22,7 @@ export default function TestsScreen({ navigation }) {
                 console.log('Il y a', rows);
 
                 const questionsFromExcel = [];
-                for (let i = 0; i < rows.length && i < 18; i++) {
+                for (let i = 0; i < rows.length && i < 18; i++) { //i++ to increment i by 1 after each iter..
                     if (rows[i] && rows[i][0]) { 
                         questionsFromExcel.push(rows[i][0]);
                     } else {
@@ -51,12 +54,51 @@ export default function TestsScreen({ navigation }) {
             const nextText = questions[nextIndex];
             console.log('texte suivant:', nextText);
             setCellText(nextText);
+            setScore(score + 1);
         } else {
             console.log('Fin des données');
-            setCellText('FIn des questions');
+            setTestEnded(true);
         }
     };
+//Page for Test Results!!!!!!!!!!!
+    const handleRetakeTest = () => {
+        setCurrentQuestionIndex(0);
+        setScore(0);
+        setTestEnded(false);
+        setCellText(questions[0]);
+    }
+    if (testEnded) {
+        return (
+            <SafeAreaView style={styles.safeArea}>
+                <View style={styles.container}>
+                    <Text style={styles.text2}>Résultats du Test</Text>
+                    <Text style={styles.result}>Votre score: {score}</Text>
+                </View>
+                <View style={styles.boutonsContainer}>
+                    <Pressable 
+                        onPress={handleRetakeTest}
+                        style={({ pressed }) => {
+                            return { opacity: pressed ? 0.5 : 1, ...styles.button2 }
+                        }}>
+                        <Text>Refaire le test</Text>
 
+                    </Pressable>
+                    <Pressable
+                        onPress={() => navigation.navigate("Results")}
+                        style={({ pressed }) => {
+                            return { opacity: pressed ? 0.5 : 1, ...styles.button2 }
+                        }}>
+                        <Text>Sauvegarder</Text>
+                    </Pressable>
+                </View>
+                <View style={styles.imageContainer}>
+                <Image style={styles.image2} source={require("../../assets/images/MAJAX.png")} resizeMode='contain'/>
+                <Image style={{width: 100, height: 100, marginTop: 170, marginLeft:15}} source={require("../../assets/images/epf.jpg")} resizeMode='contain'/>
+                </View>
+            </SafeAreaView>
+        )
+    }
+//Test Page!!!!!!!!!!!
     return (
         <SafeAreaView style={styles.safeArea}>
             <View style={styles.imageContainer}>
@@ -179,5 +221,32 @@ const styles = StyleSheet.create({
     buttonText: {
         fontWeight: 'bold',
         color: 'white',
+    },
+    text2: {
+        
+        textAlign: 'center', 
+        fontSize: 26, 
+        fontWeight: 'bold',
+    },
+    image2: {
+        marginLeft: 45,
+        marginTop: 150,
+        width: 150,
+        height: 150,
+    },
+    button2: {
+        marginTop: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 15,
+        borderRadius: 20,
+        borderWidth: 1,
+        marginHorizontal: 64,
+        textAlign: 'center',
+        backgroundColor: 'lightgray',
+    },
+    result: {
+        fontSize: 20,
+        textAlign: 'center',
     }
 });
