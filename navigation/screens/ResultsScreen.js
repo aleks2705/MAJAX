@@ -5,10 +5,23 @@ import SettingsScreen from '../../components/SettingsScreen';
 
 export default function ResultsScreen({navigation}) {
     const [searchText, setSearchText] = React.useState('');
+
+    const onSubmitSearch = () => {
+        if (searchText.toLowerCase() === 'paris-cachan') {
+            navigation.navigate('ParisCachan');
+        } else if (searchText.toLowerCase() === 'montpellier') {
+            navigation.navigate('Montpellier');
+        } else if (searchText.toLowerCase() === 'troyes') {
+            navigation.navigate('Troyes');
+        } else {
+            alert('Campus not found');
+        }
+    };
+    
     return(
         <SafeAreaView style={styles.safeArea}>
             <View style={styles.container}>
-                <SearchBar searchText={searchText} onChangeText={setSearchText} />
+                <SearchBar searchText={searchText} onSubmitSearch={onSubmitSearch} onChangeText={setSearchText} />
                 <Text 
                     style={styles.text}>Résultats
                 </Text>

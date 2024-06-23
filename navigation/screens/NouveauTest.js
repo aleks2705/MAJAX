@@ -12,6 +12,12 @@ export default function TestsScreen({ navigation }) {
     const [score, setScore] = React.useState(0);
     const [testEnded, setTestEnded] = React.useState(false);
 //Excel!!!!!!!!
+    React.useEffect(() => {
+        const filePath = 'C:\Users\nag35\react-demo\MAJAX\src\new.xlsx';
+        console.log('Lecture.....');
+        readExcelFile(filePath);
+    }, []);
+
     const readExcelFile = (filePath) => {
         console.log('Lecture à ', filePath);
         ExcelRenderer(filePath, (err, resp) => {
@@ -39,11 +45,7 @@ export default function TestsScreen({ navigation }) {
         });
     };
 
-    React.useEffect(() => {
-        const filePath = 'MAJAX/src/new.xlsx';
-        console.log('Lecture.....');
-        readExcelFile(filePath);
-    }, []);
+    
 
     const handleValiderPress = () => {
         const nextIndex = currentQuestionIndex + 1;
@@ -114,7 +116,7 @@ export default function TestsScreen({ navigation }) {
                     <Entypo name="back" size={30} />
                 </Pressable>
                 <Text style={styles.text}>
-                    {cellText}
+                    J'aime personnaliser les choses{/*{cellText}*/}
                 </Text>
             </View>
 
@@ -180,6 +182,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         padding: 16,
         marginHorizontal: 15,
+
     },
     text: {
         height: 300,
@@ -192,6 +195,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center', 
         padding: 10, 
         color: 'white', 
+        fontSize: 20,
+        
+
     },
     image: {
         marginLeft: 15,
